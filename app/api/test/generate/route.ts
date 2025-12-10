@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Missing topic' }, { status: 400 });
     }
 
-    const tokens = getTokens();
+    const tokens = await getTokens();
     if (!tokens?.accessToken) {
         return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
