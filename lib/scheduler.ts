@@ -5,7 +5,7 @@ import { twitterClient } from './twitter';
 import { getTokens, getScheduleConfig, saveScheduleConfig as saveConfigToDb } from './storage';
 
 // Store the active job to update/cancel it
-let activeJob: cron.ScheduledTask | null = null;
+let activeJob: any | null = null;
 
 export async function startScheduler() {
     // Only run cron locally. Vercel uses Vercel Cron (Serverless).
