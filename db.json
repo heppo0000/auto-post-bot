@@ -1,0 +1,11 @@
+{
+  "tokens": {
+    "accessToken": "ODZYWDd4YXc5bFJiczFNWlRHZFRhQnRnT0Rqb1BUY3UzNkFOcjJWb0RrODVuOjE3NjUzMzU3NTg5ODM6MTowOmF0OjE",
+    "refreshToken": "OWlUQjlwQllaUENtQ1pqQnhpWnRjb2loSGdJaHBGR0ZlMmdDVmU2bXp6aC1iOjE3NjUzMzU3NTg5ODM6MTowOnJ0OjE",
+    "expiresAt": 1765342959176
+  },
+  "config": {
+    "time": "0 9,12,15,17,21 * * *",
+    "topic": "AI Trends"
+  }
+}
