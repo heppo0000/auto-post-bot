@@ -58,10 +58,18 @@ export async function getTokens(): Promise<TokenData | null> {
 }
 
 export async function clearTokens() {
-    if (USE_KV) {
-        await kv.del('tokens');
-    } else {
-        const data = await readDb();
+    // Try clearing KV
+    if (!!process.env.KV_REST_API_URL && !!process.env.KV_REST_API_TOKEN) {
+        try {
+            await kv.del('tokens');
+        } catch (e) {
+            console.error('Failed to clear KV tokens', e);
+        }
+    }
+
+    // Always clear local DB as fallback/cleanup
+    if (fs.existsSync(DB_PATH)) {
+        const data = JSON.parse(await fs.promises.readFile(DB_PATH, 'utf-8'));
         data.tokens = null;
         await writeDb(data);
     }
