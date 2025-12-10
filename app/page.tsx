@@ -62,8 +62,14 @@ export default function Home() {
           {status?.isConnected && (
             <button
               onClick={async () => {
-                await fetch('/api/auth/logout', { method: 'POST' });
-                window.location.reload();
+                if (!confirm("ログアウトしますか？")) return;
+                try {
+                  await fetch('/api/auth/logout', { method: 'POST', cache: 'no-store' });
+                  alert("ログアウトしました。");
+                  window.location.href = window.location.href; // Hard reload
+                } catch (e) {
+                  alert("ログアウトに失敗しました");
+                }
               }}
               className="w-full text-center py-2 px-4 text-zinc-400 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors text-sm"
             >
