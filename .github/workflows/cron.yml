@@ -1,0 +1,14 @@
+name: Trigger Auto Post
+on:
+  schedule:
+    # UTC times: 0:00(9:00), 3:00(12:00), 6:00(15:00), 8:00(17:00), 12:00(21:00 JST)
+    - cron: '0 0,3,6,8,12 * * *'
+  workflow_dispatch: # Allow manual trigger button
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Vercel Cron Endpoint
+        run: |
+          curl -X GET ${{ secrets.VERCEL_APP_URL }}/api/cron \
+          -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
