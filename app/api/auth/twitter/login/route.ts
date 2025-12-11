@@ -9,8 +9,18 @@ export async function GET(request: NextRequest) {
 
     // Store verifier and state in cookie for the callback
     const response = NextResponse.redirect(url);
-    response.cookies.set('codeVerifier', codeVerifier, { httpOnly: true, path: '/' });
-    response.cookies.set('state', state, { httpOnly: true, path: '/' });
+    response.cookies.set('codeVerifier', codeVerifier, {
+        httpOnly: true,
+        path: '/',
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production'
+    });
+    response.cookies.set('state', state, {
+        httpOnly: true,
+        path: '/',
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production'
+    });
 
     return response;
 }
